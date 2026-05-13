@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as MessRouteImport } from './routes/mess'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MessRoute = MessRouteImport.update({
   id: '/mess',
   path: '/mess',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/community': typeof CommunityRoute
   '/map': typeof MapRoute
   '/mess': typeof MessRoute
+  '/profile': typeof ProfileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/community': typeof CommunityRoute
   '/map': typeof MapRoute
   '/mess': typeof MessRoute
+  '/profile': typeof ProfileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/community': typeof CommunityRoute
   '/map': typeof MapRoute
   '/mess': typeof MessRoute
+  '/profile': typeof ProfileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/community' | '/map' | '/mess'
+  fullPaths: '/' | '/community' | '/map' | '/mess' | '/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/community' | '/map' | '/mess'
-  id: '__root__' | '/' | '/community' | '/map' | '/mess'
+  to: '/' | '/community' | '/map' | '/mess' | '/profile'
+  id: '__root__' | '/' | '/community' | '/map' | '/mess' | '/profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +76,18 @@ export interface RootRouteChildren {
   CommunityRoute: typeof CommunityRoute
   MapRoute: typeof MapRoute
   MessRoute: typeof MessRoute
+  ProfileRoute: typeof ProfileRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mess': {
       id: '/mess'
       path: '/mess'
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   CommunityRoute: CommunityRoute,
   MapRoute: MapRoute,
   MessRoute: MessRoute,
+  ProfileRoute: ProfileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
