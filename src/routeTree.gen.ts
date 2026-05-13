@@ -13,6 +13,7 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as MessRouteImport } from './routes/mess'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as CommunityRouteImport } from './routes/community'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ProfileRoute = ProfileRouteImport.update({
@@ -35,6 +36,11 @@ const CommunityRoute = CommunityRouteImport.update({
   path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +49,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/community': typeof CommunityRoute
   '/map': typeof MapRoute
   '/mess': typeof MessRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/community': typeof CommunityRoute
   '/map': typeof MapRoute
   '/mess': typeof MessRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/community': typeof CommunityRoute
   '/map': typeof MapRoute
   '/mess': typeof MessRoute
@@ -65,14 +74,22 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/community' | '/map' | '/mess' | '/profile'
+  fullPaths: '/' | '/assistant' | '/community' | '/map' | '/mess' | '/profile'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/community' | '/map' | '/mess' | '/profile'
-  id: '__root__' | '/' | '/community' | '/map' | '/mess' | '/profile'
+  to: '/' | '/assistant' | '/community' | '/map' | '/mess' | '/profile'
+  id:
+    | '__root__'
+    | '/'
+    | '/assistant'
+    | '/community'
+    | '/map'
+    | '/mess'
+    | '/profile'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistantRoute: typeof AssistantRoute
   CommunityRoute: typeof CommunityRoute
   MapRoute: typeof MapRoute
   MessRoute: typeof MessRoute
@@ -109,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,6 +145,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistantRoute: AssistantRoute,
   CommunityRoute: CommunityRoute,
   MapRoute: MapRoute,
   MessRoute: MessRoute,
