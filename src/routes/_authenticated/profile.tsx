@@ -3,7 +3,7 @@ import { Settings, LogOut, Bell, Moon, BookOpen, Trophy, Calendar, ChevronRight 
 import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
 import { userProfile } from "@/lib/mockData";
 
-export const Route = createFileRoute("/profile")({
+export const Route = createFileRoute("/_authenticated/profile")({
   component: ProfilePage,
   head: () => ({
     meta: [

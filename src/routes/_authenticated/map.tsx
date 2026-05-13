@@ -4,7 +4,7 @@ import { Search, Star, MapPin } from "lucide-react";
 import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
 import { cafeterias } from "@/lib/mockData";
 
-export const Route = createFileRoute("/map")({
+export const Route = createFileRoute("/_authenticated/map")({
   component: MapPage,
   head: () => ({
     meta: [
