@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, Send, Sparkles } from "lucide-react";
 import { PhoneShell } from "@/components/PhoneShell";
 
-export const Route = createFileRoute("/assistant")({
+export const Route = createFileRoute("/_authenticated/assistant")({
   component: AssistantPage,
   head: () => ({
     meta: [

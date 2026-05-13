@@ -1,9 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Settings, LogOut, Bell, Moon, BookOpen, Trophy, Calendar, ChevronRight } from "lucide-react";
 import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
 import { userProfile } from "@/lib/mockData";
+import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/profile")({
+export const Route = createFileRoute("/_authenticated/profile")({
   component: ProfilePage,
   head: () => ({
     meta: [
@@ -14,6 +15,11 @@ export const Route = createFileRoute("/profile")({
 });
 
 function ProfilePage() {
+  const navigate = useNavigate();
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    navigate({ to: "/login", replace: true });
+  };
   return (
     <PhoneShell>
       <ScreenHeader
@@ -70,7 +76,7 @@ function ProfilePage() {
           </button>
         ))}
 
-        <button className="w-full ring-hairline rounded-xl p-3.5 flex items-center gap-3 text-left text-red-400 mt-4">
+        <button onClick={signOut} className="w-full ring-hairline rounded-xl p-3.5 flex items-center gap-3 text-left text-red-400 mt-4">
           <div className="size-9 rounded-lg bg-red-500/10 grid place-items-center">
             <LogOut className="size-4" />
           </div>

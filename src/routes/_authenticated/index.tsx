@@ -4,7 +4,7 @@ import { ArrowUpRight, MapPin, Bell, BookOpenCheck, ChevronRight, Flame } from "
 import { PhoneShell } from "@/components/PhoneShell";
 import { todaySchedule, messMenu, cafeterias, upcomingExams, friends, userProfile, notifications } from "@/lib/mockData";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   component: Dashboard,
   head: () => ({
     meta: [

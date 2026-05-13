@@ -4,7 +4,7 @@ import { Heart, MessageCircle, Plus } from "lucide-react";
 import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
 import { feedPosts, type FeedPost } from "@/lib/mockData";
 
-export const Route = createFileRoute("/community")({
+export const Route = createFileRoute("/_authenticated/community")({
   component: CommunityPage,
   head: () => ({
     meta: [

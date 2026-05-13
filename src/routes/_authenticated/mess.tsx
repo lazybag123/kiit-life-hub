@@ -4,7 +4,7 @@ import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
 import { messMenu } from "@/lib/mockData";
 import { Star } from "lucide-react";
 
-export const Route = createFileRoute("/mess")({
+export const Route = createFileRoute("/_authenticated/mess")({
   component: MessPage,
   head: () => ({
     meta: [
