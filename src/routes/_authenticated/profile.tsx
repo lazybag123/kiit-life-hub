@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Settings, LogOut, Bell, Moon, BookOpen, Trophy, Calendar, ChevronRight } from "lucide-react";
+import { Settings, LogOut, Bell, Moon, BookOpen, Trophy, Calendar, ChevronRight, BadgeCheck } from "lucide-react";
 import { PhoneShell, ScreenHeader } from "@/components/PhoneShell";
 import { userProfile } from "@/lib/mockData";
 import { supabase } from "@/integrations/supabase/client";
@@ -39,7 +39,10 @@ function ProfilePage() {
             {userProfile.name[0]}
           </div>
           <h2 className="text-lg font-semibold text-foreground">{userProfile.name}</h2>
-          <p className="text-xs text-muted-foreground">{userProfile.email}</p>
+          <p className="text-xs text-muted-foreground inline-flex items-center gap-1 justify-center">
+            {userProfile.email}
+            <BadgeCheck className="size-3.5 text-emerald-400" aria-label="Email verified" />
+          </p>
           <div className="mt-3 flex justify-center gap-2">
             <Chip>{userProfile.branch} • Sem {userProfile.semester}</Chip>
             <Chip>{userProfile.hostel}</Chip>
