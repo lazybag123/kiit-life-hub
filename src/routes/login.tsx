@@ -49,7 +49,7 @@ function LoginPage() {
           },
         });
         if (error) throw error;
-        setInfo("Account created. Signing you in…");
+        setInfo("Account created. Check your inbox for a verification link before signing in.");
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
